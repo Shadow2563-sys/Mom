@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BabyG Admin - Add Products</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        
+        .admin-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #2c3e50;
+            font-size: 2.5rem;
+            background: linear-gradient(to right, #3498db, #2ecc71);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #34495e;
+        }
+        
+        input, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        input:focus, textarea:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+            outline: none;
+        }
+        
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .btn-submit {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(to right, #3498db, #2ecc71);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-submit:hover {
+            background: linear-gradient(to right, #2980b9, #27ae60);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .preview-container {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .image-preview {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 2px solid #eee;
+        }
+        
+        .instructions {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .instructions h3 {
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        
+        .instructions ol {
+            padding-left: 20px;
+        }
+        
+        .instructions li {
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <h1>Add New Products</h1>
+        
+        <div class="instructions">
+            <h3>How to add products:</h3>
+            <ol>
+                <li>Upload product images to an image hosting service (like <a href="https://catbox.moe/" target="_blank">catbox.moe</a>)</li>
+                <li>Paste the image URLs in the "Image URLs" field (one per line for multiple images)</li>
+                <li>Enter the product name</li>
+                <li>Click "Add Product" to save it to the system</li>
+            </ol>
+        </div>
+        
+        <form id="product-form">
+            <div class="form-group">
+                <label for="image-urls">Image URLs (one per line for multiple images)</label>
+                <textarea id="image-urls" placeholder="https://example.com/image1.jpg
+https://example.com/image2.jpg"></textarea>
+                <div class="preview-container" id="image-preview"></div>
+            </div>
+            
+            <div class="form-group">
+                <label for="product-name">Product Name</label>
+                <input type="text" id="product-name" placeholder="Enter product name" required>
+            </div>
+            
+            <button type="submit" class="btn-submit">Add Product</button>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('product-form');
+            const imageUrlsTextarea = document.getElementById('image-urls');
+            const imagePreviewContainer = document.getElementById('image-preview');
+            
+            // Preview images when URLs are entered
+            imageUrlsTextarea.addEventListener('input', function() {
+                imagePreviewContainer.innerHTML = '';
+                const urls = this.value.split('\n').filter(url => url.trim() !== '');
+                
+                urls.forEach(url => {
+                    if (url.trim() !== '') {
+                        const img = document.createElement('img');
+                        img.src = url.trim();
+                        img.className = 'image-preview';
+                        img.onerror = function() {
+                            this.style.display = 'none';
+                        };
+                        imagePreviewContainer.appendChild(img);
+                    }
+                });
+            });
+            
+            // Handle form submission
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const productName = document.getElementById('product-name').value.trim();
+                const imageUrls = imageUrlsTextarea.value.split('\n')
+                    .map(url => url.trim())
+                    .filter(url => url !== '');
+                
+                if (productName === '') {
+                    alert('Please enter a product name');
+                    return;
+                }
+                
+                if (imageUrls.length === 0) {
+                    alert('Please enter at least one image URL');
+                    return;
+                }
+                
+                // Create new product object
+                const newProduct = {
+                    id: Date.now(), // Unique ID based on timestamp
+                    name: productName,
+                    images: imageUrls
+                };
+                
+                // Save to localStorage
+                saveProduct(newProduct);
+                
+                // Reset form
+                form.reset();
+                imagePreviewContainer.innerHTML = '';
+                
+                alert('Product added successfully!');
+            });
+            
+            function saveProduct(product) {
+                // Get existing products from localStorage
+                let products = JSON.parse(localStorage.getItem('babyg-products')) || [];
+                
+                // Add new product
+                products.push(product);
+                
+                // Save back to localStorage
+                localStorage.setItem('babyg-products', JSON.stringify(products));
+            }
+        });
+    </script>
+</body>
+</html>
