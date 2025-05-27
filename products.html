@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baby G - Premium Kitchen & Living Products</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px 0;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #3498db, #2ecc71);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .products-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .product-card {
+            background-color: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(to right, #3498db, #2ecc71);
+            z-index: 2;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .product-image {
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .product-card:hover .product-image img {
+            transform: scale(1.1);
+        }
+        
+        .product-info {
+            padding: 25px;
+            position: relative;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .product-title {
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+            color: #34495e;
+            font-weight: 600;
+            line-height: 1.4;
+            flex-grow: 1;
+        }
+        
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: auto;
+        }
+        
+        .quantity-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(to right, #3498db, #2ecc71);
+            color: white;
+            border: none;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .quantity-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .quantity-display {
+            font-size: 1.2rem;
+            font-weight: 600;
+            min-width: 30px;
+            text-align: center;
+        }
+        
+        .cart-summary {
+            max-width: 1200px;
+            margin: 40px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .cart-summary h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        
+        .cart-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .cart-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 10px;
+        }
+        
+        .cart-item img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-right: 15px;
+        }
+        
+        .cart-item-info {
+            flex-grow: 1;
+        }
+        
+        .cart-item-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+        }
+        
+        .image-gallery {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 5px;
+            padding-bottom: 10px;
+            height: 100%;
+        }
+        
+        .image-gallery img {
+            scroll-snap-align: start;
+            height: 250px;
+            width: auto;
+            min-width: 100%;
+            object-fit: cover;
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+        
+        .page-btn {
+            width: 40px;
+            height: 40px;
+            margin: 0 5px;
+            border: none;
+            border-radius: 8px;
+            background: #3498db;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .page-btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .page-btn.active {
+            background: #2ecc71;
+        }
+        
+        .checkout-btn {
+            display: block;
+            width: 200px;
+            margin: 30px auto 0;
+            padding: 15px;
+            background: linear-gradient(to right, #e74c3c, #f39c12);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+        }
+        
+        .checkout-btn:hover {
+            background: linear-gradient(to right, #c0392b, #d35400);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .checkout-btn:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        @media (max-width: 768px) {
+            .products-container {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .page-btn {
+                width: 35px;
+                height: 35px;
+                margin: 0 3px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Baby G Essentials</h1>
+        <p>Premium products for elegant living</p>
+    </header>
+    
+    <!-- Page 1 -->
+    <div class="page" id="page-1" style="display: block;">
+        <div class="products-container">
+            <!-- Product 1 -->
+            <div class="product-card" data-id="1">
+                <div class="product-image">
+                    <img src="https://files.catbox.moe/6h2l89.jpg" alt="Oil Brush Grill Brush">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Oil Brush Grill Brush Grill Cleaning Silicone Brush</h3>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn minus">-</button>
+                        <span class="quantity-display">0</span>
+                        <button class="quantity-btn plus">+</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 2 -->
+            <div class="product-card" data-id="2">
+                <div class="product-image">
+                    <img src="https://files.catbox.moe/pn8i3u.jpg" alt="Gas Stove Windproof Shield">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Gas Stove Windproof Shield Windproof Ring Stainless Steel</h3>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn minus">-</button>
+                        <span class="quantity-display">0</span>
+                        <button class="quantity-btn plus">+</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 3 -->
+            <div class="product-card" data-id="3">
+                <div class="product-image">
+                    <img src="https://files.catbox.moe/u2xc21.jpg" alt="Storage Containers">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">5pcs Storage Containers, Multipurpose Steel Reusable Food Storage</h3>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn minus">-</button>
+                        <span class="quantity-display">0</span>
+                        <button class="quantity-btn plus">+</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 4 -->
+            <div class="product-card" data-id="4">
+                <div class="image-gallery">
+                    <img src="https://files.catbox.moe/b78c5k.jpg" alt="Shower Hat">
+                    <img src="https://files.catbox.moe/rjtv1y.jpg" alt="Shower Hat">
+                    <img src="https://files.catbox.moe/0ngrjr.jpg" alt="Shower Hat">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Cute Cartoons Shower Elasticated Waterproof Reusable Bath Hat</h3>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn minus">-</button>
+                        <span class="quantity-display">0</span>
+                        <button class="quantity-btn plus">+</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 5 -->
+            <div class="product-card" data-id="5">
+                <div class="product-image">
+                    <img src="https://files.catbox.moe/r2h31b.jpg" alt="Toilet Bowl Cleaner">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Toilet Bowl Cleaner & Disinfectant, Urine Deodorizer</h3>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn minus">-</button>
+                        <span class="quantity-display">0</span>
+                        <button class="quantity-btn plus">+</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 6 -->
+            <div class="product-card" data-id="6">
+                <div class="product-image">
+                    <img src="https://files.catbox.moe/3a66m5.jpg" alt="Apron">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Apron Erasable Hand Kitchen Waterproof Oxford Cloth</h3>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn minus">-</button>
+                        <span class="quantity-display">0</span>
+                        <button class="quantity-btn plus">+</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Page 2 -->
+    <div class="page" id="page-2" style="display: none;">
+        <div class="products-container">
+            <!-- Product 7 -->
+            <div class="product-card" data-id="7">
+                <div class="product-image">
+                    <img src="https://files.catbox.moe/tzilnt.jpg" alt="Blender">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Bardefu Blender 5052</h3>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn minus">-</button>
+                        <span class="quantity-display">0</span>
+                        <button class="quantity-btn plus">+</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 8 -->
+            <div class="product-card" data-id="8">
+                <div class="image-gallery">
+                    <img src="https://files.catbox.moe/njpw8f.jpg" alt="Breakfast Maker">
+                    <img src="https://files.catbox.moe/bljgkt.jpg" alt="Breakfast Maker">
+                    <img src="https://files.catbox.moe/yl8x5j.jpg" alt="Breakfast Maker">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Silver Crest 3in1 Breakfast Maker</h3>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn minus">-</button>
+                        <span class="quantity-display">0</span>
+                        <button class="quantity-btn plus">+</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 9 -->
+            <div class="product-card" data-id="9">
+                <div class="image-gallery">
+                    <img src="https://files.catbox.moe/1spu2a.jpg" alt="Steam Iron">
+                    <img src="https://files.catbox.moe/knffvx.jpg" alt="Steam Iron">
+                    <img src="https://files.catbox.moe/7qux8g.jpg" alt="Steam Iron">
+                    <img src="https://files.catbox.moe/15h2fd.jpg" alt="Steam Iron">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Portable Handheld Steam Iron Machine</h3>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn minus">-</button>
+                        <span class="quantity-display">0</span>
+                        <button class="quantity-btn plus">+</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 10 -->
+            <div class="product-card" data-id="10">
+                <div class="image-gallery">
+                    <img src="https://files.catbox.moe/tl5u45.jpg" alt="Hair Straightener">
+                    <img src="https://files.catbox.moe/7ai4xr.jpg" alt="Hair Straightener">
+                    <img src="https://files.catbox.moe/j2budm.jpg" alt="Hair Straightener">
+                    <img src="https://files.catbox.moe/z9sp9y.jpg" alt="Hair Straightener">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">3-in-1 PTC Hair Straightener Styling Appliances</h3>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn minus">-</button>
+                        <span class="quantity-display">0</span>
+                        <button class="quantity-btn plus">+</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 11 -->
+            <div class="product-card" data-id="11">
+                <div class="image-gallery">
+                    <img src="https://files.catbox.moe/nxqfb7.jpg" alt="Popcorn Machine">
+                    <img src="https://files.catbox.moe/lm1ry7.jpg" alt="Popcorn Machine">
+                    <img src="https://files.catbox.moe/be3z5x.jpg" alt="Popcorn Machine">
+                    <img src="https://files.catbox.moe/c21819.jpg" alt="Popcorn Machine">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Popcorn Machine Mini Electric Popcorn Maker Corn Cooking Machine</h3>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn minus">-</button>
+                        <span class="quantity-display">0</span>
+                        <button class="quantity-btn plus">+</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 12 -->
+            <div class="product-card" data-id="12">
+                <div class="image-gallery">
+                    <img src="https://files.catbox.moe/d7aq8x.jpg" alt="Washing Machine Base">
+                    <img src="https://files.catbox.moe/sgp13e.jpg" alt="Washing Machine Base">
+                    <img src="https://files.catbox.moe/44hs0t.jpg" alt="Washing Machine Base">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">4Pcs Universal Washing Machine Base Cushion Bracket</h3>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn minus">-</button>
+                        <span class="quantity-display">0</span>
+                        <button class="quantity-btn plus">+</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Page 3 -->
+    <div class="page" id="page-3" style="display: none;">
+        <div class="products-container">
+            <!-- Product 13 -->
+            <div class="product-card" data-id="13">
+                <div class="image-gallery">
+                    <img src="https://files.catbox.moe/59zbxk.jpg" alt="Humidifier">
+                    <img src="https://files.catbox.moe/t6y5z1.jpg" alt="Humidifier">
+                    <img src="https://files.catbox.moe/0tmgj1.jpg" alt="Humidifier">
+                    <img src="https://files.catbox.moe/nz7171.jpg" alt="Humidifier">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">6L Large Room Essential Oil Air Ultrasonic Humidifier</h3>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn minus">-</button>
+                        <span class="quantity-display">0</span>
+                        <button class="quantity-btn plus">+</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 14 -->
+            <div class="product-card" data-id="14">
+                <div class="image-gallery">
+                    <img src="https://files.catbox.moe/dd38w8.jpg" alt="Glass Teapot">
+                    <img src="https://files.catbox.moe/fm288d.jpg" alt="Glass Teapot">
+                    <img src="https://files.catbox.moe/05jr4l.jpg" alt="Glass Teapot">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Glass Teapot Home & Office Tea Pot Kettle Drinkware</h3>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn minus">-</button>
+                        <span class="quantity-display">0</span>
+                        <button class="quantity-btn plus">+</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 15 -->
+            <div class="product-card" data-id="15">
+                <div class="image-gallery">
+                    <img src="https://files.catbox.moe/hb5l7d.jpg" alt="Squeeze Bottle">
+                    <img src="https://files.catbox.moe/z8sj1v.jpg" alt="Squeeze Bottle">
+                    <img src="https://files.catbox.moe/b49r6e.jpg" alt="Squeeze Bottle">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">White Plastic Squeeze Bottle With Cap Dispenser Bottle</h3>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn minus">-</button>
+                        <span class="quantity-display">0</span>
+                        <button class="quantity-btn plus">+</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 16 -->
+            <div class="product-card" data-id="16">
+                <div class="image-gallery">
+                    <img src="https://files.catbox.moe/g1f6vd.jpg" alt="Fruit Juicer">
+                    <img src="https://files.catbox.moe/ou5q92.jpg" alt="Fruit Juicer">
+                    <img src="https://files.catbox.moe/x779pj.jpg" alt="Fruit Juicer">
+                    <img src="https://files.catbox.moe/fa5hku.jpg" alt="Fruit Juicer">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Portable Fruit Juicer with 8 Blade Home USB Rechargeable</h3>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn minus">-</button>
+                        <span class="quantity-display">0</span>
+                        <button class="quantity-btn plus">+</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 17 -->
+            <div class="product-card" data-id="17">
+                <div class="image-gallery">
+                    <img src="https://files.catbox.moe/ha947f.jpg" alt="Car Phone Holder">
+                    <img src="https://files.catbox.moe/hovxul.jpg" alt="Car Phone Holder">
+                    <img src="https://files.catbox.moe/3ezpzk.jpg" alt="Car Phone Holder">
+                    <img src="https://files.catbox.moe/2tge8y.jpg" alt="Car Phone Holder">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Universal Car Phone Holder, Magnetic Wall Mount with Rotatable Design</h3>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn minus">-</button>
+                        <span class="quantity-display">0</span>
+                        <button class="quantity-btn plus">+</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 18 -->
+            <div class="product-card" data-id="18">
+                <div class="image-gallery">
+                    <img src="https://files.catbox.moe/2ympi9.jpg" alt="Wall Clock">
+                    <img src="https://files.catbox.moe/r4ubaf.jpg" alt="Wall Clock">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Modern Wall Clock - Elegant Home Decor</h3>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn minus">-</button>
+                        <span class="quantity-display">0</span>
+                        <button class="quantity-btn plus">+</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Page 4 -->
+    <div class="page" id="page-4" style="display: none;">
+        <div class="products-container">
+            <!-- Product 19 -->
+            <div class="product-card" data-id="19">
+                <div class="image-gallery">
+                    <img src="https://files.catbox.moe/ilhh64.jpg" alt="Food Warmer">
+                    <img src="https://files.catbox.moe/f08wof.jpg" alt="Food Warmer">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">New food warmer set 3 kitchen pot insulation 9 hours luxury hot pot set</h3>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn minus">-</button>
+                        <span class="quantity-display">0</span>
+                        <button class="quantity-btn plus">+</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 20 -->
+            <div class="product-card" data-id="20">
+                <div class="image-gallery">
+                    <img src="https://files.catbox.moe/lwseff.jpg" alt="Cooking Pot">
+                    <img src="https://files.catbox.moe/unywop.jpg" alt="Cooking Pot">
+                    <img src="https://files.catbox.moe/z34ydx.jpg" alt="Cooking Pot">
+                    <img src="https://files.catbox.moe/7clqoc.jpg" alt="Cooking Pot">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Bosch Granite Cooking Pot - Premium Kitchenware</h3>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn minus">-</button>
+                        <span class="quantity-display">0</span>
+                        <button class="quantity-btn plus">+</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 21 -->
+            <div class="product-card" data-id="21">
+                <div class="image-gallery">
+                    <img src="https://files.catbox.moe/djuuy1.jpg" alt="Cleaning Brush">
+                    <img src="https://files.catbox.moe/4k06so.jpg" alt="Cleaning Brush">
+                    <img src="https://files.catbox.moe/ygv8oj.jpg" alt="Cleaning Brush">
+                    <img src="https://files.catbox.moe/qk2rhs.jpg" alt="Cleaning Brush">
+                    <img src="https://files.catbox.moe/x1nood.jpg" alt="Cleaning Brush">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Wireless Home Kitchen and Bathroom Multifunctional Cleaning Tool</h3>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn minus">-</button>
+                        <span class="quantity-display">0</span>
+                        <button class="quantity-btn plus">+</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 22 -->
+            <div class="product-card" data-id="22">
+                <div class="product-image">
+                    <img src="https://files.catbox.moe/hcx4mo.jpg" alt="Toilet Bowl Cleaner">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Powerful Toilet Bowl Cleaner Bathroom Cleaner Stain Remover</h3>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn minus">-</button>
+                        <span class="quantity-display">0</span>
+                        <button class="quantity-btn plus">+</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 23 -->
+            <div class="product-card" data-id="23">
+                <div class="image-gallery">
+                    <img src="https://files.catbox.moe/8ngqxp.jpg" alt="Beer Carrier">
+                    <img src="https://files.catbox.moe/jq7feg.jpg" alt="Beer Carrier">
+                    <img src="https://files.catbox.moe/jigfcc.jpg" alt="Beer Carrier">
+                    <img src="https://files.catbox.moe/yepp0i.jpg" alt="Beer Carrier">
+                    <img src="https://files.catbox.moe/iq1hsb.jpg" alt="Beer Carrier">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Foldable Plastic Beer Carrier Portable Handheld Water Bottle Holder</h3>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn minus">-</button>
+                        <span class="quantity-display">0</span>
+                        <button class="quantity-btn plus">+</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 24 -->
+            <div class="product-card" data-id="24">
+                <div class="image-gallery">
+                    <img src="https://files.catbox.moe/nhre68.jpg" alt="Clothes Organizer">
+                    <img src="https://files.catbox.moe/nxzcl1.jpg" alt="Clothes Organizer">
+                    <img src="https://files.catbox.moe/j3mmti.jpg" alt="Clothes Organizer">
+                    <img src="https://files.catbox.moe/ho14k9.jpg" alt="Clothes Organizer">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">5-layer Kids Daily Clothes Organizer Foldable Label Weekly Storage Rack</h3>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn minus">-</button>
+                        <span class="quantity-display">0</span>
+                        <button class="quantity-btn plus">+</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Page 5 -->
+    <div class="page" id="page-5" style="display: none;">
+        <div class="products-container">
+            <!-- Product 25 -->
+            <div class="product-card" data-id="25">
+                <div class="image-gallery">
+                    <img src="https://files.catbox.moe/eh5kpm.jpg" alt="Heat Sealer">
+                    <img src="https://files.catbox.moe/fb1gca.jpg" alt="Heat Sealer">
+                    <img src="https://files.catbox.moe/7xj9qr.jpg" alt="Heat Sealer">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">2in1 Heat Sealer Mini Rechargeable Sealing Machine</h3>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn minus">-</button>
+                        <span class="quantity-display">0</span>
+                        <button class="quantity-btn plus">+</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 26 -->
+            <div class="product-card" data-id="26">
+                <div class="product-image">
+                    <img src="https://files.catbox.moe/e282e5.jpg" alt="Hair Dryer">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Nova Hair Dryer - Professional Styling Tool</h3>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn minus">-</button>
+                        <span class="quantity-display">0</span>
+                        <button class="quantity-btn plus">+</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 27 -->
+            <div class="product-card" data-id="27">
+                <div class="product-image">
+                    <img src="https://files.catbox.moe/z9k0kl.jpg" alt="Vegetable Slicer">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Premium Vegetable Slicer - Multi-Purpose Kitchen Tool</h3>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn minus">-</button>
+                        <span class="quantity-display">0</span>
+                        <button class="quantity-btn plus">+</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Pagination -->
+    <div class="pagination">
+        <button class="page-btn active" onclick="showPage(1)">1</button>
+        <button class="page-btn" onclick="showPage(2)">2</button>
+        <button class="page-btn" onclick="showPage(3)">3</button>
+        <button class="page-btn" onclick="showPage(4)">4</button>
+        <button class="page-btn" onclick="showPage(5)">5</button>
+    </div>
+    
+    <div class="cart-summary">
+        <h2>Your Selections</h2>
+        <div class="cart-items" id="cart-items">
+            <!-- Cart items will be dynamically inserted here -->
+            <p class="empty-cart-message">No items selected yet</p>
+        </div>
+        
+        <a href="checkout.html" class="checkout-btn" id="checkout-btn" disabled>Checkout Now</a>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const cart = {};
+            const cartItemsContainer = document.getElementById('cart-items');
+            const checkoutBtn = document.getElementById('checkout-btn');
+            
+            // Initialize all products
+            document.querySelectorAll('.product-card').forEach(card => {
+                const id = card.getAttribute('data-id');
+                const title = card.querySelector('.product-title').textContent;
+                const image = card.querySelector('.product-image img') ? 
+                    card.querySelector('.product-image img').src : 
+                    card.querySelector('.image-gallery img').src;
+                const quantityDisplay = card.querySelector('.quantity-display');
+                const plusBtn = card.querySelector('.plus');
+                const minusBtn = card.querySelector('.minus');
+                
+                cart[id] = {
+                    title,
+                    image,
+                    quantity: 0
+                };
+                
+                plusBtn.addEventListener('click', () => {
+                    cart[id].quantity++;
+                    quantityDisplay.textContent = cart[id].quantity;
+                    updateCartDisplay();
+                    updateCheckoutButton();
+                });
+                
+                minusBtn.addEventListener('click', () => {
+                    if (cart[id].quantity > 0) {
+                        cart[id].quantity--;
+                        quantityDisplay.textContent = cart[id].quantity;
+                        updateCartDisplay();
+                        updateCheckoutButton();
+                    }
+                });
+            });
+            
+            function updateCartDisplay() {
+                // Clear current cart display
+                cartItemsContainer.innerHTML = '';
+                
+                // Add all items with quantity > 0
+                let hasItems = false;
+                let totalItems = 0;
+                
+                for (const id in cart) {
+                    if (cart[id].quantity > 0) {
+                        hasItems = true;
+                        totalItems += cart[id].quantity;
+                        const cartItem = document.createElement('div');
+                        cartItem.className = 'cart-item';
+                        cartItem.innerHTML = `
+                            <img src="${cart[id].image}" alt="${cart[id].title}">
+                            <div class="cart-item-info">
+                                <div class="cart-item-title">${cart[id].title}</div>
+                                <div class="cart-item-quantity">
+                                    <span>Quantity: ${cart[id].quantity}</span>
+                                </div>
+                            </div>
+                        `;
+                        cartItemsContainer.appendChild(cartItem);
+                    }
+                }
+                
+                // Show empty message if no items
+                if (!hasItems) {
+                    cartItemsContainer.innerHTML = '<p class="empty-cart-message">No items selected yet</p>';
+                }
+                
+                // Save cart to localStorage
+                localStorage.setItem('babyg-cart', JSON.stringify(cart));
+            }
+            
+            function updateCheckoutButton() {
+                // Check if any items are in cart
+                let hasItems = false;
+                for (const id in cart) {
+                    if (cart[id].quantity > 0) {
+                        hasItems = true;
+                        break;
+                    }
+                }
+                
+                checkoutBtn.disabled = !hasItems;
+            }
+            
+            // Load cart from localStorage if available
+            const savedCart = localStorage.getItem('babyg-cart');
+            if (savedCart) {
+                const parsedCart = JSON.parse(savedCart);
+                for (const id in parsedCart) {
+                    if (cart[id]) {
+                        cart[id].quantity = parsedCart[id].quantity;
+                        document.querySelector(`.product-card[data-id="${id}"] .quantity-display`).textContent = parsedCart[id].quantity;
+                    }
+                }
+                updateCartDisplay();
+                updateCheckoutButton();
+            }
+        });
+        
+        function showPage(pageNumber) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.style.display = 'none';
+            });
+            
+            // Show selected page
+            document.getElementById(`page-${pageNumber}`).style.display = 'block';
+            
+            // Update active pagination button
+            document.querySelectorAll('.page-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelectorAll('.page-btn')[pageNumber-1].classList.add('active');
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+</html>
