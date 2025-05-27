@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shopping with BabyG - Premium Home Essentials</title>
+    <title>BabyG Home Essentials</title>
     <style>
         * {
             margin: 0;
@@ -51,6 +51,7 @@
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
             backdrop-filter: blur(5px);
             border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
         }
         
         h1 {
@@ -147,6 +148,24 @@
             color: #444;
         }
         
+        .admin-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 8px 15px;
+            background: #2c3e50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        .admin-btn:hover {
+            background: #1a252f;
+        }
+        
         @media (max-width: 768px) {
             h1 {
                 font-size: 2.5rem;
@@ -159,6 +178,13 @@
             .hero-content {
                 padding: 30px 20px;
             }
+            
+            .admin-btn {
+                top: 10px;
+                right: 10px;
+                padding: 6px 12px;
+                font-size: 12px;
+            }
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -166,6 +192,9 @@
 <body>
     <section class="hero">
         <div class="hero-content">
+            <button class="admin-btn" id="admin-login-btn">
+                <i class="fas fa-lock"></i> Admin Login
+            </button>
             <h1>Shopping with BabyG</h1>
             <p class="tagline">Discover premium home essentials that make everyday life beautiful</p>
             <a href="products.html" class="btn-start">
@@ -176,7 +205,7 @@
     
     <section class="about-section">
         <h2>About Our Collection</h2>
-        <p>Welcome to Shopping with BabyG, your premier destination for high-quality home and kitchen essentials. We carefully curate each product in our collection to bring you items that combine functionality with elegant design.</p>
+        <p>Welcome to BabyG Home Essentials, your premier destination for high-quality home and kitchen products. We carefully curate each product to bring you items that combine functionality with elegant design.</p>
         
         <p>Our mission is to help you create a home that's not just comfortable, but truly special. From innovative kitchen gadgets to beautiful home organization solutions, every product is selected with your needs in mind.</p>
         
@@ -206,5 +235,16 @@
             </div>
         </div>
     </section>
+
+    <script>
+        document.getElementById('admin-login-btn').addEventListener('click', function() {
+            const password = prompt("Enter admin password:");
+            if(password === "HomeEssentials123") { // Change this password
+                window.location.href = "admin.html";
+            } else {
+                alert("Incorrect password");
+            }
+        });
+    </script>
 </body>
 </html>
