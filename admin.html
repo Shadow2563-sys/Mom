@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BabyG Admin - Add Products</title>
+    <title>Admin Panel - BabyG Home Essentials</title>
     <style>
         * {
             margin: 0;
@@ -25,6 +25,7 @@
             padding: 40px;
             border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            display: none; /* Hidden until login */
         }
         
         h1 {
@@ -123,10 +124,79 @@
         .instructions li {
             margin-bottom: 8px;
         }
+        
+        #login-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        
+        .login-box {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 400px;
+        }
+        
+        .login-box h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .login-box input {
+            margin-bottom: 15px;
+        }
+        
+        .logout-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 8px 15px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        .logout-btn:hover {
+            background: #c0392b;
+        }
     </style>
 </head>
 <body>
-    <div class="admin-container">
+    <div id="login-overlay">
+        <div class="login-box">
+            <h2>Admin Login</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="admin-username">Username</label>
+                    <input type="text" id="admin-username" placeholder="Enter admin username" required>
+                </div>
+                <div class="form-group">
+                    <label for="admin-password">Password</label>
+                    <input type="password" id="admin-password" placeholder="Enter password" required>
+                </div>
+                <button type="submit" class="btn-submit">Login</button>
+            </form>
+        </div>
+    </div>
+    
+    <button class="logout-btn" id="logout-btn" style="display: none;">
+        <i class="fas fa-sign-out-alt"></i> Logout
+    </button>
+    
+    <div class="admin-container" id="admin-panel">
         <h1>Add New Products</h1>
         
         <div class="instructions">
@@ -156,8 +226,51 @@ https://example.com/image2.jpg"></textarea>
         </form>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
     <script>
+        // Admin credentials (CHANGE THESE!)
+        const ADMIN_CREDENTIALS = {
+            username: "BabyGAdmin",
+            password: "BabyGAdmin" // CHANGE THIS PASSWORD
+        };
+
         document.addEventListener('DOMContentLoaded', function() {
+            const loginForm = document.getElementById('login-form');
+            const loginOverlay = document.getElementById('login-overlay');
+            const adminPanel = document.getElementById('admin-panel');
+            const logoutBtn = document.getElementById('logout-btn');
+            
+            // Check if already logged in
+            if(localStorage.getItem('adminLoggedIn') === 'true') {
+                loginOverlay.style.display = 'none';
+                adminPanel.style.display = 'block';
+                logoutBtn.style.display = 'block';
+            }
+            
+            // Handle login
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const username = document.getElementById('admin-username').value;
+                const password = document.getElementById('admin-password').value;
+                
+                if(username === ADMIN_CREDENTIALS.username && password === ADMIN_CREDENTIALS.password) {
+                    localStorage.setItem('adminLoggedIn', 'true');
+                    loginOverlay.style.display = 'none';
+                    adminPanel.style.display = 'block';
+                    logoutBtn.style.display = 'block';
+                } else {
+                    alert('Invalid credentials. Please try again.');
+                }
+            });
+            
+            // Handle logout
+            logoutBtn.addEventListener('click', function() {
+                localStorage.removeItem('adminLoggedIn');
+                window.location.reload();
+            });
+            
+            // Product form functionality
             const form = document.getElementById('product-form');
             const imageUrlsTextarea = document.getElementById('image-urls');
             const imagePreviewContainer = document.getElementById('image-preview');
@@ -168,7 +281,7 @@ https://example.com/image2.jpg"></textarea>
                 const urls = this.value.split('\n').filter(url => url.trim() !== '');
                 
                 urls.forEach(url => {
-                    if (url.trim() !== '') {
+                    if(url.trim() !== '') {
                         const img = document.createElement('img');
                         img.src = url.trim();
                         img.className = 'image-preview';
@@ -189,12 +302,12 @@ https://example.com/image2.jpg"></textarea>
                     .map(url => url.trim())
                     .filter(url => url !== '');
                 
-                if (productName === '') {
+                if(productName === '') {
                     alert('Please enter a product name');
                     return;
                 }
                 
-                if (imageUrls.length === 0) {
+                if(imageUrls.length === 0) {
                     alert('Please enter at least one image URL');
                     return;
                 }
