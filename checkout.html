@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Baby G - Premium Kitchen & Living Products</title>
+    <title>Checkout - Baby G Essentials</title>
     <style>
         * {
             margin: 0;
@@ -42,214 +42,111 @@
             -webkit-text-fill-color: transparent;
         }
         
-        .products-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 30px;
+        .checkout-container {
             max-width: 1200px;
             margin: 0 auto;
-        }
-        
-        .product-card {
-            background-color: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            z-index: 1;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .product-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 5px;
-            background: linear-gradient(to right, #3498db, #2ecc71);
-            z-index: 2;
-        }
-        
-        .product-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-        }
-        
-        .product-image {
-            height: 250px;
-            overflow: hidden;
-            position: relative;
-        }
-        
-        .product-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-        
-        .product-card:hover .product-image img {
-            transform: scale(1.1);
-        }
-        
-        .product-info {
-            padding: 25px;
-            position: relative;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .product-title {
-            font-size: 1.1rem;
-            margin-bottom: 12px;
-            color: #34495e;
-            font-weight: 600;
-            line-height: 1.4;
-            flex-grow: 1;
-        }
-        
-        .quantity-controls {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-top: auto;
-        }
-        
-        .quantity-btn {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: linear-gradient(to right, #3498db, #2ecc71);
-            color: white;
-            border: none;
-            font-size: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .quantity-btn:hover {
-            transform: scale(1.1);
-        }
-        
-        .quantity-display {
-            font-size: 1.2rem;
-            font-weight: 600;
-            min-width: 30px;
-            text-align: center;
-        }
-        
-        .cart-summary {
-            max-width: 1200px;
-            margin: 40px auto;
             background: white;
-            padding: 25px;
+            padding: 30px;
             border-radius: 15px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
         
-        .cart-summary h2 {
+        .order-summary {
+            margin-bottom: 30px;
+        }
+        
+        .order-summary h2 {
             color: #2c3e50;
             margin-bottom: 20px;
+            padding-bottom: 10px;
             border-bottom: 2px solid #eee;
-            padding-bottom: 10px;
         }
         
-        .cart-items {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 20px;
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
         }
         
-        .cart-item {
-            display: flex;
-            align-items: center;
-            padding: 15px;
-            background: #f9f9f9;
-            border-radius: 10px;
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
         }
         
-        .cart-item img {
-            width: 60px;
-            height: 60px;
-            object-fit: cover;
-            border-radius: 8px;
-            margin-right: 15px;
-        }
-        
-        .cart-item-info {
-            flex-grow: 1;
-        }
-        
-        .cart-item-title {
+        th {
+            background-color: #f8f9fa;
             font-weight: 600;
-            margin-bottom: 5px;
         }
         
-        .cart-item-quantity {
-            display: flex;
-            align-items: center;
+        .total-row {
+            font-weight: bold;
+            background-color: #f8f9fa;
         }
         
-        .image-gallery {
-            display: flex;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            gap: 5px;
-            padding-bottom: 10px;
-            height: 100%;
-        }
-        
-        .image-gallery img {
-            scroll-snap-align: start;
-            height: 250px;
-            width: auto;
-            min-width: 100%;
-            object-fit: cover;
-        }
-        
-        .checkout-btn {
-            display: block;
-            width: 200px;
-            margin: 30px auto 0;
-            padding: 15px;
-            background: linear-gradient(to right, #e74c3c, #f39c12);
+        .whatsapp-btn {
+            display: inline-block;
+            background-color: #25D366;
             color: white;
-            border: none;
+            padding: 15px 25px;
             border-radius: 8px;
-            font-size: 18px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-align: center;
             text-decoration: none;
+            font-weight: 600;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
         }
         
-        .checkout-btn:hover {
-            background: linear-gradient(to right, #c0392b, #d35400);
+        .whatsapp-btn:hover {
+            background-color: #128C7E;
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
         
-        .checkout-btn:disabled {
-            background: #95a5a6;
-            cursor: not-allowed;
-            transform: none;
+        .website-btn {
+            display: block;
+            background-color: #3498db;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 30px;
+            transition: all 0.3s ease;
+            text-align: center;
+            max-width: 300px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .website-btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .empty-cart-message {
+            text-align: center;
+            padding: 30px;
+            color: #7f8c8d;
+            font-size: 1.2rem;
         }
         
         @media (max-width: 768px) {
-            .products-container {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            }
-            
             h1 {
                 font-size: 2rem;
+            }
+            
+            th, td {
+                padding: 8px 10px;
+                font-size: 14px;
+            }
+            
+            .whatsapp-btn, .website-btn {
+                padding: 12px 20px;
+                font-size: 14px;
             }
         }
     </style>
@@ -260,136 +157,89 @@
         <p>Premium products for elegant living</p>
     </header>
     
-    <div class="products-container">
-        <!-- Your existing products here -->
-        <!-- Product 1 -->
-        <div class="product-card" data-id="1">
-            <div class="product-image">
-                <img src="https://files.catbox.moe/6h2l89.jpg" alt="Oil Brush Grill Brush">
+    <div class="checkout-container">
+        <div class="order-summary">
+            <h2>Order Summary</h2>
+            <div id="order-items">
+                <!-- Order items will be dynamically inserted here -->
+                <p class="empty-cart-message">No items in your cart</p>
             </div>
-            <div class="product-info">
-                <h3 class="product-title">Oil Brush Grill Brush Grill Cleaning Silicone Brush</h3>
-                <div class="quantity-controls">
-                    <button class="quantity-btn minus">-</button>
-                    <span class="quantity-display">0</span>
-                    <button class="quantity-btn plus">+</button>
-                </div>
-            </div>
+            
+            <button id="whatsapp-btn" class="whatsapp-btn" style="display: none;">
+                Complete Order via WhatsApp
+            </button>
         </div>
         
-        <!-- Continue with all other products -->
-        
-    </div>
-    
-    <div class="cart-summary">
-        <h2>Your Selections</h2>
-        <div class="cart-items" id="cart-items">
-            <!-- Cart items will be dynamically inserted here -->
-            <p class="empty-cart-message">No items selected yet</p>
-        </div>
-        
-        <a href="checkout.html" class="checkout-btn" id="checkout-btn" disabled>Checkout Now</a>
+        <a href="https://wa.me/2348093017755?text=I%20want%20to%20get%20a%20website%20made%20for%20my%20business" class="website-btn">
+            Do you want a website like this? Click here
+        </a>
     </div>
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const cart = {};
-            const cartItemsContainer = document.getElementById('cart-items');
-            const checkoutBtn = document.getElementById('checkout-btn');
+            const orderItemsContainer = document.getElementById('order-items');
+            const whatsappBtn = document.getElementById('whatsapp-btn');
             
-            // Initialize all products
-            document.querySelectorAll('.product-card').forEach(card => {
-                const id = card.getAttribute('data-id');
-                const title = card.querySelector('.product-title').textContent;
-                const image = card.querySelector('.product-image img').src;
-                const quantityDisplay = card.querySelector('.quantity-display');
-                const plusBtn = card.querySelector('.plus');
-                const minusBtn = card.querySelector('.minus');
-                
-                cart[id] = {
-                    title,
-                    image,
-                    quantity: 0
-                };
-                
-                plusBtn.addEventListener('click', () => {
-                    cart[id].quantity++;
-                    quantityDisplay.textContent = cart[id].quantity;
-                    updateCartDisplay();
-                    updateCheckoutButton();
-                });
-                
-                minusBtn.addEventListener('click', () => {
-                    if (cart[id].quantity > 0) {
-                        cart[id].quantity--;
-                        quantityDisplay.textContent = cart[id].quantity;
-                        updateCartDisplay();
-                        updateCheckoutButton();
-                    }
-                });
-            });
-            
-            function updateCartDisplay() {
-                // Clear current cart display
-                cartItemsContainer.innerHTML = '';
-                
-                // Add all items with quantity > 0
-                let hasItems = false;
-                let totalItems = 0;
-                
-                for (const id in cart) {
-                    if (cart[id].quantity > 0) {
-                        hasItems = true;
-                        totalItems += cart[id].quantity;
-                        const cartItem = document.createElement('div');
-                        cartItem.className = 'cart-item';
-                        cartItem.innerHTML = `
-                            <img src="${cart[id].image}" alt="${cart[id].title}">
-                            <div class="cart-item-info">
-                                <div class="cart-item-title">${cart[id].title}</div>
-                                <div class="cart-item-quantity">
-                                    <span>Quantity: ${cart[id].quantity}</span>
-                                </div>
-                            </div>
-                        `;
-                        cartItemsContainer.appendChild(cartItem);
-                    }
-                }
-                
-                // Show empty message if no items
-                if (!hasItems) {
-                    cartItemsContainer.innerHTML = '<p class="empty-cart-message">No items selected yet</p>';
-                }
-                
-                // Save cart to localStorage
-                localStorage.setItem('babyg-cart', JSON.stringify(cart));
-            }
-            
-            function updateCheckoutButton() {
-                // Check if any items are in cart
-                let hasItems = false;
-                for (const id in cart) {
-                    if (cart[id].quantity > 0) {
-                        hasItems = true;
-                        break;
-                    }
-                }
-                
-                checkoutBtn.disabled = !hasItems;
-            }
-            
-            // Load cart from localStorage if available
+            // Load cart from localStorage
             const savedCart = localStorage.getItem('babyg-cart');
+            let cart = {};
+            
             if (savedCart) {
-                const parsedCart = JSON.parse(savedCart);
-                for (const id in parsedCart) {
-                    if (cart[id]) {
-                        cart[id].quantity = parsedCart[id].quantity;
-                        document.querySelector(`.product-card[data-id="${id}"] .quantity-display`).textContent = parsedCart[id].quantity;
-                    }
+                cart = JSON.parse(savedCart);
+                
+                // Filter out items with quantity 0
+                const items = Object.entries(cart).filter(([id, item]) => item.quantity > 0);
+                
+                if (items.length > 0) {
+                    // Create table for order items
+                    let tableHTML = `
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Quantity</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                    `;
+                    
+                    // Add each item to the table
+                    items.forEach(([id, item]) => {
+                        tableHTML += `
+                            <tr>
+                                <td>${item.title}</td>
+                                <td>${item.quantity}</td>
+                            </tr>
+                        `;
+                    });
+                    
+                    // Close table
+                    tableHTML += `
+                            </tbody>
+                        </table>
+                    `;
+                    
+                    orderItemsContainer.innerHTML = tableHTML;
+                    whatsappBtn.style.display = 'inline-block';
+                    
+                    // Set up WhatsApp button
+                    whatsappBtn.addEventListener('click', function() {
+                        // Create WhatsApp message
+                        let message = "I would like to get these products:\n\n";
+                        
+                        items.forEach(([id, item]) => {
+                            message += `- ${item.title} (Qty: ${item.quantity})\n`;
+                        });
+                        
+                        message += "\nPlease let me know the total and payment details. Thank you!";
+                        
+                        // Encode message for URL
+                        const encodedMessage = encodeURIComponent(message);
+                        
+                        // Open WhatsApp with the message
+                        window.open(`https://wa.me/2348028633657?text=${encodedMessage}`, '_blank');
+                    });
                 }
-                updateCartDisplay();
-                updateCheckoutButton();
             }
         });
     </script>
