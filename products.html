@@ -42,6 +42,21 @@
             -webkit-text-fill-color: transparent;
         }
         
+        .search-container {
+            max-width: 1200px;
+            margin: 0 auto 30px;
+            padding: 0 20px;
+        }
+        
+        .search-box {
+            width: 100%;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
         .products-container {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -295,6 +310,10 @@
         <p>Premium products for elegant living</p>
     </header>
     
+    <div class="search-container">
+        <input type="text" class="search-box" placeholder="Search products..." id="search-input">
+    </div>
+    
     <!-- Page 1 -->
     <div class="page" id="page-1" style="display: block;">
         <div class="products-container">
@@ -389,12 +408,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    
-    <!-- Page 2 -->
-    <div class="page" id="page-2" style="display: none;">
-        <div class="products-container">
+            
             <!-- Product 7 -->
             <div class="product-card" data-id="7">
                 <div class="product-image">
@@ -500,8 +514,8 @@
         </div>
     </div>
     
-    <!-- Page 3 -->
-    <div class="page" id="page-3" style="display: none;">
+    <!-- Page 2 -->
+    <div class="page" id="page-2" style="display: none;">
         <div class="products-container">
             <!-- Product 13 -->
             <div class="product-card" data-id="13">
@@ -606,12 +620,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    
-    <!-- Page 4 -->
-    <div class="page" id="page-4" style="display: none;">
-        <div class="products-container">
+            
             <!-- Product 19 -->
             <div class="product-card" data-id="19">
                 <div class="image-gallery">
@@ -719,8 +728,8 @@
         </div>
     </div>
     
-    <!-- Page 5 -->
-    <div class="page" id="page-5" style="display: none;">
+    <!-- Page 3 -->
+    <div class="page" id="page-3" style="display: none;">
         <div class="products-container">
             <!-- Product 25 -->
             <div class="product-card" data-id="25">
@@ -768,12 +777,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    
-    <!-- Page 6 - New Products -->
-    <div class="page" id="page-6" style="display: none;">
-        <div class="products-container">
+            
             <!-- Product 28 -->
             <div class="product-card" data-id="28">
                 <div class="product-image">
@@ -908,7 +912,12 @@
                     </div>
                 </div>
             </div>
-            
+        </div>
+    </div>
+    
+    <!-- Page 4 -->
+    <div class="page" id="page-4" style="display: none;">
+        <div class="products-container">
             <!-- Product 37 -->
             <div class="product-card" data-id="37">
                 <div class="product-image">
@@ -1114,7 +1123,12 @@
                     </div>
                 </div>
             </div>
-            
+        </div>
+    </div>
+    
+    <!-- Page 5 -->
+    <div class="page" id="page-5" style="display: none;">
+        <div class="products-container">
             <!-- Product 49 -->
             <div class="product-card" data-id="49">
                 <div class="image-gallery">
@@ -1317,7 +1331,12 @@
                     </div>
                 </div>
             </div>
-            
+        </div>
+    </div>
+    
+    <!-- Page 6 -->
+    <div class="page" id="page-6" style="display: none;">
+        <div class="products-container">
             <!-- Product 61 -->
             <div class="product-card" data-id="61">
                 <div class="product-image">
@@ -1512,7 +1531,12 @@
                     </div>
                 </div>
             </div>
-            
+        </div>
+    </div>
+    
+    <!-- Page 7 -->
+    <div class="page" id="page-7" style="display: none;">
+        <div class="products-container">
             <!-- Product 73 -->
             <div class="product-card" data-id="73">
                 <div class="image-gallery">
@@ -1745,6 +1769,7 @@
         <button class="page-btn" onclick="showPage(4)">4</button>
         <button class="page-btn" onclick="showPage(5)">5</button>
         <button class="page-btn" onclick="showPage(6)">6</button>
+        <button class="page-btn" onclick="showPage(7)">7</button>
     </div>
     
     <div class="cart-summary">
@@ -1762,6 +1787,7 @@
             const cart = {};
             const cartItemsContainer = document.getElementById('cart-items');
             const checkoutBtn = document.getElementById('checkout-btn');
+            const searchInput = document.getElementById('search-input');
             
             // Initialize all products
             document.querySelectorAll('.product-card').forEach(card => {
@@ -1845,6 +1871,20 @@
                 
                 checkoutBtn.disabled = !hasItems;
             }
+            
+            // Search functionality
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                
+                document.querySelectorAll('.product-card').forEach(card => {
+                    const title = card.querySelector('.product-title').textContent.toLowerCase();
+                    if (title.includes(searchTerm)) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
             
             // Load cart from localStorage if available
             const savedCart = localStorage.getItem('babyg-cart');
