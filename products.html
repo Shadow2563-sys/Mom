@@ -99,14 +99,15 @@
             position: relative;
         }
         
-        .product-image img {
+        .product-image img, .product-image video {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: transform 0.5s ease;
         }
         
-        .product-card:hover .product-image img {
+        .product-card:hover .product-image img,
+        .product-card:hover .product-image video {
             transform: scale(1.1);
         }
         
@@ -221,7 +222,7 @@
             height: 100%;
         }
         
-        .image-gallery img {
+        .image-gallery img, .image-gallery video {
             scroll-snap-align: start;
             height: 250px;
             width: auto;
@@ -301,6 +302,59 @@
                 height: 35px;
                 margin: 0 3px;
             }
+        }
+
+        /* Video controls styling */
+        video::-webkit-media-controls {
+            display: none !important;
+        }
+        
+        .video-container {
+            position: relative;
+            height: 250px;
+            overflow: hidden;
+        }
+        
+        .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            opacity: 0.8;
+            transition: all 0.3s ease;
+        }
+        
+        .play-button:hover {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+        
+        .play-button::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 0;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            border-left: 25px solid #3498db;
+            margin-left: 5px;
         }
     </style>
 </head>
@@ -1760,6 +1814,302 @@
             </div>
         </div>
     </div>
+
+    <!-- Page 8 - New Products -->
+    <div class="page" id="page-8" style="display: none;">
+        <div class="products-container">
+            <!-- Product 86 -->
+            <div class="product-card" data-id="86">
+                <div class="product-image">
+                    <div class="video-container">
+                        <video loop muted>
+                            <source src="https://files.catbox.moe/cevgp8.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <div class="play-button"></div>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Digital Printer - High Quality Printing Solution</h3>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn minus">-</button>
+                        <span class="quantity-display">0</span>
+                        <button class="quantity-btn plus">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 87 -->
+            <div class="product-card" data-id="87">
+                <div class="product-image">
+                    <div class="video-container">
+                        <video loop muted>
+                            <source src="https://files.catbox.moe/tl6sd3.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <div class="play-button"></div>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Mini Shaver - Portable and Efficient</h3>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn minus">-</button>
+                        <span class="quantity-display">0</span>
+                        <button class="quantity-btn plus">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 88 -->
+            <div class="product-card" data-id="88">
+                <div class="product-image">
+                    <div class="video-container">
+                        <video loop muted>
+                            <source src="https://files.catbox.moe/nd3mit.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <div class="play-button"></div>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Night Hawk - Premium Night Light</h3>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn minus">-</button>
+                        <span class="quantity-display">0</span>
+                        <button class="quantity-btn plus">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 89 -->
+            <div class="product-card" data-id="89">
+                <div class="image-gallery">
+                    <img src="https://files.catbox.moe/fq9rbz.jpg" alt="Glass Spray Bottle">
+                    <img src="https://files.catbox.moe/i5f6f8.jpg" alt="Glass Spray Bottle">
+                    <img src="https://files.catbox.moe/29n6q8.jpg" alt="Glass Spray Bottle">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">100ml High Quality Glass Multipurpose Mister Bottle with Funnel and Brush</h3>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn minus">-</button>
+                        <span class="quantity-display">0</span>
+                        <button class="quantity-btn plus">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 90 -->
+            <div class="product-card" data-id="90">
+                <div class="image-gallery">
+                    <img src="https://files.catbox.moe/rrvp3f.jpg" alt="Kitchen Hooks">
+                    <img src="https://files.catbox.moe/s3mt3n.jpg" alt="Kitchen Hooks">
+                    <img src="https://files.catbox.moe/li2jey.jpg" alt="Kitchen Hooks">
+                    <img src="https://files.catbox.moe/t0ouao.jpg" alt="Kitchen Hooks">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Kitchen Iron Art Seamless Nail Free Hooks - Multiple Row Storage Racks</h3>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn minus">-</button>
+                        <span class="quantity-display">0</span>
+                        <button class="quantity-btn plus">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 91 -->
+            <div class="product-card" data-id="91">
+                <div class="image-gallery">
+                    <img src="https://files.catbox.moe/7fpvz3.jpg" alt="Luminous Stars">
+                    <img src="https://files.catbox.moe/zaxjp1.jpg" alt="Luminous Stars">
+                    <img src="https://files.catbox.moe/e3p4l1.jpg" alt="Luminous Stars">
+                    <img src="https://files.catbox.moe/2gyh9i.jpg" alt="Luminous Stars">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Luminous Stars Wall Stickers - 3D Glow in The Dark Decoration</h3>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn minus">-</button>
+                        <span class="quantity-display">0</span>
+                        <button class="quantity-btn plus">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 92 -->
+            <div class="product-card" data-id="92">
+                <div class="image-gallery">
+                    <img src="https://files.catbox.moe/h3ijjb.jpg" alt="Manual Juicer">
+                    <img src="https://files.catbox.moe/v6qjq2.jpg" alt="Manual Juicer">
+                    <img src="https://files.catbox.moe/g4m8fr.jpg" alt="Manual Juicer">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Stainless Steel Manual Juicer for Citrus Fruits</h3>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn minus">-</button>
+                        <span class="quantity-display">0</span>
+                        <button class="quantity-btn plus">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 93 -->
+            <div class="product-card" data-id="93">
+                <div class="image-gallery">
+                    <img src="https://files.catbox.moe/pww3ri.jpg" alt="Kenwood Airfryer">
+                    <img src="https://files.catbox.moe/cpfb9m.jpg" alt="Kenwood Airfryer">
+                    <img src="https://files.catbox.moe/tc2l9t.jpg" alt="Kenwood Airfryer">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">KENWOOD AIRFRYER - Healthy Cooking Solution</h3>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn minus">-</button>
+                        <span class="quantity-display">0</span>
+                        <button class="quantity-btn plus">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 94 -->
+            <div class="product-card" data-id="94">
+                <div class="image-gallery">
+                    <img src="https://files.catbox.moe/5h41ic.jpg" alt="Oil Pot">
+                    <img src="https://files.catbox.moe/txq209.jpg" alt="Oil Pot">
+                    <img src="https://files.catbox.moe/hcyh4x.jpg" alt="Oil Pot">
+                    <img src="https://files.catbox.moe/tminic.jpg" alt="Oil Pot">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Stainless Steel Oil Pot with Filter - Household Essential</h3>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn minus">-</button>
+                        <span class="quantity-display">0</span>
+                        <button class="quantity-btn plus">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 95 -->
+            <div class="product-card" data-id="95">
+                <div class="image-gallery">
+                    <img src="https://files.catbox.moe/qfjhd8.jpg" alt="Storage Rack">
+                    <img src="https://files.catbox.moe/4ix6xj.jpg" alt="Storage Rack">
+                    <img src="https://files.catbox.moe/h3es7m.jpg" alt="Storage Rack">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Non-perforated Storage Rack for Bathroom Organization</h3>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn minus">-</button>
+                        <span class="quantity-display">0</span>
+                        <button class="quantity-btn plus">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 96 -->
+            <div class="product-card" data-id="96">
+                <div class="image-gallery">
+                    <img src="https://files.catbox.moe/n7npqa.jpg" alt="Electric Food Blender">
+                    <img src="https://files.catbox.moe/f8l8om.jpg" alt="Electric Food Blender">
+                    <img src="https://files.catbox.moe/uhe7uj.jpg" alt="Electric Food Blender">
+                    <img src="https://files.catbox.moe/u1qr7x.jpg" alt="Electric Food Blender">
+                    <img src="https://files.catbox.moe/rxoxiw.jpg" alt="Electric Food Blender">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Multifunctional Electric Food Blender - 7 Speed Mini Mixer</h3>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn minus">-</button>
+                        <span class="quantity-display">0</span>
+                        <button class="quantity-btn plus">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 97 -->
+            <div class="product-card" data-id="97">
+                <div class="image-gallery">
+                    <img src="https://files.catbox.moe/cbdq0t.jpg" alt="Glass Rock Slab">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Italian Round Glass Rock Slab - 2in1 Coffee Table</h3>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn minus">-</button>
+                        <span class="quantity-display">0</span>
+                        <button class="quantity-btn plus">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 98 -->
+            <div class="product-card" data-id="98">
+                <div class="product-image">
+                    <img src="https://files.catbox.moe/jud6e9.jpg" alt="Cooking Pot">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">KORKMAZ TURKEY STAINLESS 18/10 COOKING POT (16,20,24,28cm)</h3>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn minus">-</button>
+                        <span class="quantity-display">0</span>
+                        <button class="quantity-btn plus">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 99 -->
+            <div class="product-card" data-id="99">
+                <div class="product-image">
+                    <div class="video-container">
+                        <video loop muted>
+                            <source src="https://files.catbox.moe/uzssyy.MP4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <div class="play-button"></div>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Big Tote Bag - Durable and Spacious</h3>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn minus">-</button>
+                        <span class="quantity-display">0</span>
+                        <button class="quantity-btn plus">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 100 -->
+            <div class="product-card" data-id="100">
+                <div class="product-image">
+                    <div class="video-container">
+                        <video loop muted>
+                            <source src="https://files.catbox.moe/9m6e94.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <div class="play-button"></div>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Coffee Maker with Reusable Filter - Eco Friendly</h3>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn minus">-</button>
+                        <span class="quantity-display">0</span>
+                        <button class="quantity-btn plus">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 101 -->
+            <div class="product-card" data-id="101">
+                <div class="product-image">
+                    <img src="https://files.catbox.moe/erc477.jpg" alt="Ice Cream Machine">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Household Ice Cream Machine - Fully Automatic Portable</h3>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn minus">-</button>
+                        <span class="quantity-display">0</span>
+                        <button class="quantity-btn plus">+</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     
     <!-- Pagination -->
     <div class="pagination">
@@ -1770,6 +2120,7 @@
         <button class="page-btn" onclick="showPage(5)">5</button>
         <button class="page-btn" onclick="showPage(6)">6</button>
         <button class="page-btn" onclick="showPage(7)">7</button>
+        <button class="page-btn" onclick="showPage(8)">8</button>
     </div>
     
     <div class="cart-summary">
@@ -1899,6 +2250,27 @@
                 updateCartDisplay();
                 updateCheckoutButton();
             }
+
+            // Video play functionality
+            document.querySelectorAll('.video-container').forEach(container => {
+                const video = container.querySelector('video');
+                const playButton = container.querySelector('.play-button');
+                
+                container.addEventListener('click', () => {
+                    if (video.paused) {
+                        video.play();
+                        playButton.style.display = 'none';
+                    } else {
+                        video.pause();
+                        playButton.style.display = 'flex';
+                    }
+                });
+                
+                video.addEventListener('ended', () => {
+                    video.currentTime = 0;
+                    playButton.style.display = 'flex';
+                });
+            });
         });
         
         function showPage(pageNumber) {
