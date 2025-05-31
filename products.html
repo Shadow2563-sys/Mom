@@ -99,15 +99,20 @@
             position: relative;
         }
         
-        .product-image img, .product-image video {
+        .product-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: transform 0.5s ease;
         }
         
-        .product-card:hover .product-image img,
-        .product-card:hover .product-image video {
+        .product-image video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .product-card:hover .product-image img {
             transform: scale(1.1);
         }
         
@@ -222,7 +227,15 @@
             height: 100%;
         }
         
-        .image-gallery img, .image-gallery video {
+        .image-gallery img {
+            scroll-snap-align: start;
+            height: 250px;
+            width: auto;
+            min-width: 100%;
+            object-fit: cover;
+        }
+        
+        .image-gallery video {
             scroll-snap-align: start;
             height: 250px;
             width: auto;
@@ -302,59 +315,6 @@
                 height: 35px;
                 margin: 0 3px;
             }
-        }
-
-        /* Video controls styling */
-        video::-webkit-media-controls {
-            display: none !important;
-        }
-        
-        .video-container {
-            position: relative;
-            height: 250px;
-            overflow: hidden;
-        }
-        
-        .video-container video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-        
-        .play-button {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 60px;
-            height: 60px;
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 10;
-            opacity: 0.8;
-            transition: all 0.3s ease;
-        }
-        
-        .play-button:hover {
-            opacity: 1;
-            transform: translate(-50%, -50%) scale(1.1);
-        }
-        
-        .play-button::after {
-            content: '';
-            display: block;
-            width: 0;
-            height: 0;
-            border-top: 15px solid transparent;
-            border-bottom: 15px solid transparent;
-            border-left: 25px solid #3498db;
-            margin-left: 5px;
         }
     </style>
 </head>
@@ -1814,20 +1774,17 @@
             </div>
         </div>
     </div>
-
+    
     <!-- Page 8 - New Products -->
     <div class="page" id="page-8" style="display: none;">
         <div class="products-container">
             <!-- Product 86 -->
             <div class="product-card" data-id="86">
                 <div class="product-image">
-                    <div class="video-container">
-                        <video loop muted>
-                            <source src="https://files.catbox.moe/cevgp8.mp4" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                        <div class="play-button"></div>
-                    </div>
+                    <video controls>
+                        <source src="https://files.catbox.moe/cevgp8.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
                 </div>
                 <div class="product-info">
                     <h3 class="product-title">Digital Printer - High Quality Printing Solution</h3>
@@ -1838,17 +1795,14 @@
                     </div>
                 </div>
             </div>
-
+            
             <!-- Product 87 -->
             <div class="product-card" data-id="87">
                 <div class="product-image">
-                    <div class="video-container">
-                        <video loop muted>
-                            <source src="https://files.catbox.moe/tl6sd3.mp4" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                        <div class="play-button"></div>
-                    </div>
+                    <video controls>
+                        <source src="https://files.catbox.moe/tl6sd3.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
                 </div>
                 <div class="product-info">
                     <h3 class="product-title">Mini Shaver - Portable and Efficient</h3>
@@ -1859,17 +1813,14 @@
                     </div>
                 </div>
             </div>
-
+            
             <!-- Product 88 -->
             <div class="product-card" data-id="88">
                 <div class="product-image">
-                    <div class="video-container">
-                        <video loop muted>
-                            <source src="https://files.catbox.moe/nd3mit.mp4" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                        <div class="play-button"></div>
-                    </div>
+                    <video controls>
+                        <source src="https://files.catbox.moe/nd3mit.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
                 </div>
                 <div class="product-info">
                     <h3 class="product-title">Night Hawk - Premium Night Light</h3>
@@ -1880,7 +1831,7 @@
                     </div>
                 </div>
             </div>
-
+            
             <!-- Product 89 -->
             <div class="product-card" data-id="89">
                 <div class="image-gallery">
@@ -1889,7 +1840,7 @@
                     <img src="https://files.catbox.moe/29n6q8.jpg" alt="Glass Spray Bottle">
                 </div>
                 <div class="product-info">
-                    <h3 class="product-title">100ml High Quality Glass Multipurpose Mister Bottle with Funnel and Brush</h3>
+                    <h3 class="product-title">100ml High Quality Glass Multipurpose Mister Bottle with Small Funnel and Brush</h3>
                     <div class="quantity-controls">
                         <button class="quantity-btn minus">-</button>
                         <span class="quantity-display">0</span>
@@ -1897,7 +1848,7 @@
                     </div>
                 </div>
             </div>
-
+            
             <!-- Product 90 -->
             <div class="product-card" data-id="90">
                 <div class="image-gallery">
@@ -1907,7 +1858,7 @@
                     <img src="https://files.catbox.moe/t0ouao.jpg" alt="Kitchen Hooks">
                 </div>
                 <div class="product-info">
-                    <h3 class="product-title">Kitchen Iron Art Seamless Nail Free Hooks - Multiple Row Storage Racks</h3>
+                    <h3 class="product-title">Kitchen Iron Art Seamless Nail Free Hooks, Multiple Row Storage Racks</h3>
                     <div class="quantity-controls">
                         <button class="quantity-btn minus">-</button>
                         <span class="quantity-display">0</span>
@@ -1915,17 +1866,17 @@
                     </div>
                 </div>
             </div>
-
+            
             <!-- Product 91 -->
             <div class="product-card" data-id="91">
                 <div class="image-gallery">
-                    <img src="https://files.catbox.moe/7fpvz3.jpg" alt="Luminous Stars">
-                    <img src="https://files.catbox.moe/zaxjp1.jpg" alt="Luminous Stars">
-                    <img src="https://files.catbox.moe/e3p4l1.jpg" alt="Luminous Stars">
-                    <img src="https://files.catbox.moe/2gyh9i.jpg" alt="Luminous Stars">
+                    <img src="https://files.catbox.moe/7fpvz3.jpg" alt="Wall Stickers">
+                    <img src="https://files.catbox.moe/zaxjp1.jpg" alt="Wall Stickers">
+                    <img src="https://files.catbox.moe/e3p4l1.jpg" alt="Wall Stickers">
+                    <img src="https://files.catbox.moe/2gyh9i.jpg" alt="Wall Stickers">
                 </div>
                 <div class="product-info">
-                    <h3 class="product-title">Luminous Stars Wall Stickers - 3D Glow in The Dark Decoration</h3>
+                    <h3 class="product-title">Luminous Stars Wall Stickers 3D Glow in The Dark Decoration</h3>
                     <div class="quantity-controls">
                         <button class="quantity-btn minus">-</button>
                         <span class="quantity-display">0</span>
@@ -1933,7 +1884,7 @@
                     </div>
                 </div>
             </div>
-
+            
             <!-- Product 92 -->
             <div class="product-card" data-id="92">
                 <div class="image-gallery">
@@ -1950,7 +1901,7 @@
                     </div>
                 </div>
             </div>
-
+            
             <!-- Product 93 -->
             <div class="product-card" data-id="93">
                 <div class="image-gallery">
@@ -1967,7 +1918,7 @@
                     </div>
                 </div>
             </div>
-
+            
             <!-- Product 94 -->
             <div class="product-card" data-id="94">
                 <div class="image-gallery">
@@ -1977,7 +1928,7 @@
                     <img src="https://files.catbox.moe/tminic.jpg" alt="Oil Pot">
                 </div>
                 <div class="product-info">
-                    <h3 class="product-title">Stainless Steel Oil Pot with Filter - Household Essential</h3>
+                    <h3 class="product-title">Household Stainless Steel Oil Pot with Filter</h3>
                     <div class="quantity-controls">
                         <button class="quantity-btn minus">-</button>
                         <span class="quantity-display">0</span>
@@ -1985,7 +1936,7 @@
                     </div>
                 </div>
             </div>
-
+            
             <!-- Product 95 -->
             <div class="product-card" data-id="95">
                 <div class="image-gallery">
@@ -1994,7 +1945,7 @@
                     <img src="https://files.catbox.moe/h3es7m.jpg" alt="Storage Rack">
                 </div>
                 <div class="product-info">
-                    <h3 class="product-title">Non-perforated Storage Rack for Bathroom Organization</h3>
+                    <h3 class="product-title">Non Perforated Storage Rack for Bathroom</h3>
                     <div class="quantity-controls">
                         <button class="quantity-btn minus">-</button>
                         <span class="quantity-display">0</span>
@@ -2002,7 +1953,7 @@
                     </div>
                 </div>
             </div>
-
+            
             <!-- Product 96 -->
             <div class="product-card" data-id="96">
                 <div class="image-gallery">
@@ -2013,7 +1964,7 @@
                     <img src="https://files.catbox.moe/rxoxiw.jpg" alt="Electric Food Blender">
                 </div>
                 <div class="product-info">
-                    <h3 class="product-title">Multifunctional Electric Food Blender - 7 Speed Mini Mixer</h3>
+                    <h3 class="product-title">Multifunctional Electric Food Blender with 7 Speed Settings</h3>
                     <div class="quantity-controls">
                         <button class="quantity-btn minus">-</button>
                         <span class="quantity-display">0</span>
@@ -2021,14 +1972,19 @@
                     </div>
                 </div>
             </div>
-
+        </div>
+    </div>
+    
+    <!-- Page 9 - New Products -->
+    <div class="page" id="page-9" style="display: none;">
+        <div class="products-container">
             <!-- Product 97 -->
             <div class="product-card" data-id="97">
-                <div class="image-gallery">
+                <div class="product-image">
                     <img src="https://files.catbox.moe/cbdq0t.jpg" alt="Glass Rock Slab">
                 </div>
                 <div class="product-info">
-                    <h3 class="product-title">Italian Round Glass Rock Slab - 2in1 Coffee Table</h3>
+                    <h3 class="product-title">Italian Round Glass Rock Slab 2in1 Coffee Table</h3>
                     <div class="quantity-controls">
                         <button class="quantity-btn minus">-</button>
                         <span class="quantity-display">0</span>
@@ -2036,7 +1992,7 @@
                     </div>
                 </div>
             </div>
-
+            
             <!-- Product 98 -->
             <div class="product-card" data-id="98">
                 <div class="product-image">
@@ -2051,17 +2007,14 @@
                     </div>
                 </div>
             </div>
-
+            
             <!-- Product 99 -->
             <div class="product-card" data-id="99">
                 <div class="product-image">
-                    <div class="video-container">
-                        <video loop muted>
-                            <source src="https://files.catbox.moe/uzssyy.MP4" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                        <div class="play-button"></div>
-                    </div>
+                    <video controls>
+                        <source src="https://files.catbox.moe/uzssyy.MP4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
                 </div>
                 <div class="product-info">
                     <h3 class="product-title">Big Tote Bag - Durable and Spacious</h3>
@@ -2072,20 +2025,17 @@
                     </div>
                 </div>
             </div>
-
+            
             <!-- Product 100 -->
             <div class="product-card" data-id="100">
                 <div class="product-image">
-                    <div class="video-container">
-                        <video loop muted>
-                            <source src="https://files.catbox.moe/9m6e94.mp4" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                        <div class="play-button"></div>
-                    </div>
+                    <video controls>
+                        <source src="https://files.catbox.moe/9m6e94.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
                 </div>
                 <div class="product-info">
-                    <h3 class="product-title">Coffee Maker with Reusable Filter - Eco Friendly</h3>
+                    <h3 class="product-title">Coffee Maker with Reusable Filter</h3>
                     <div class="quantity-controls">
                         <button class="quantity-btn minus">-</button>
                         <span class="quantity-display">0</span>
@@ -2093,14 +2043,14 @@
                     </div>
                 </div>
             </div>
-
+            
             <!-- Product 101 -->
             <div class="product-card" data-id="101">
                 <div class="product-image">
                     <img src="https://files.catbox.moe/erc477.jpg" alt="Ice Cream Machine">
                 </div>
                 <div class="product-info">
-                    <h3 class="product-title">Household Ice Cream Machine - Fully Automatic Portable</h3>
+                    <h3 class="product-title">Household Ice Cream Machine Fully Automatic Portable</h3>
                     <div class="quantity-controls">
                         <button class="quantity-btn minus">-</button>
                         <span class="quantity-display">0</span>
@@ -2121,6 +2071,7 @@
         <button class="page-btn" onclick="showPage(6)">6</button>
         <button class="page-btn" onclick="showPage(7)">7</button>
         <button class="page-btn" onclick="showPage(8)">8</button>
+        <button class="page-btn" onclick="showPage(9)">9</button>
     </div>
     
     <div class="cart-summary">
@@ -2144,9 +2095,23 @@
             document.querySelectorAll('.product-card').forEach(card => {
                 const id = card.getAttribute('data-id');
                 const title = card.querySelector('.product-title').textContent;
-                const image = card.querySelector('.product-image img') ? 
-                    card.querySelector('.product-image img').src : 
-                    card.querySelector('.image-gallery img').src;
+                
+                // Get first image or video for cart thumbnail
+                let image;
+                const imgElement = card.querySelector('.product-image img') || 
+                                 card.querySelector('.image-gallery img') || 
+                                 card.querySelector('.product-image video') || 
+                                 card.querySelector('.image-gallery video');
+                
+                if (imgElement) {
+                    if (imgElement.tagName === 'VIDEO') {
+                        // Use poster image if available, or just the video element
+                        image = imgElement.poster || imgElement.src;
+                    } else {
+                        image = imgElement.src;
+                    }
+                }
+                
                 const quantityDisplay = card.querySelector('.quantity-display');
                 const plusBtn = card.querySelector('.plus');
                 const minusBtn = card.querySelector('.minus');
@@ -2250,27 +2215,6 @@
                 updateCartDisplay();
                 updateCheckoutButton();
             }
-
-            // Video play functionality
-            document.querySelectorAll('.video-container').forEach(container => {
-                const video = container.querySelector('video');
-                const playButton = container.querySelector('.play-button');
-                
-                container.addEventListener('click', () => {
-                    if (video.paused) {
-                        video.play();
-                        playButton.style.display = 'none';
-                    } else {
-                        video.pause();
-                        playButton.style.display = 'flex';
-                    }
-                });
-                
-                video.addEventListener('ended', () => {
-                    video.currentTime = 0;
-                    playButton.style.display = 'flex';
-                });
-            });
         });
         
         function showPage(pageNumber) {
